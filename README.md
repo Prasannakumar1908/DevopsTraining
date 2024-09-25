@@ -28,6 +28,29 @@ This guide provides step-by-step instructions to deploy a Docker image to AWS El
 
 Ensure you have the following:
 - Windows with WSL with Ubuntu 22.04 installed (Ubuntu or any other supported distribution)
+   -To install Ubuntu 22.04 in your pc, run the following command
+  ```bash
+  wsl --install -d Ubuntu-22.04
+  ```
+  After successfully installing Ubuntu, you are prompted to enter username and password. Enter your username and password. Username should be in lowercase. If you want your username in Uppercase run it by force command.
+  Now run the following commands
+  ```bash
+  sudo apt update
+  ```
+  You will be prompted to enter the password you set in the above step
+  After this step is completed, run the following command
+  ```bash
+  sudo apt upgrade -y
+  ```
+  After you are done with these steps, now check the versions of apt and sudo by using the following commands.
+  ```bash
+  apt --version
+  ```
+  ```bash
+  sudo --version
+  ```
+  
+  
 - AWS Account with sufficient permissions to create and manage EKS clusters
 - AWS CLI installed on WSL
 - Docker installed on WSL
@@ -66,10 +89,11 @@ Ensure you have the following:
 
 1. Download and install `eksctl`:
    ```bash
-   curl -s --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+   curl -sSL "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
    sudo mv /tmp/eksctl /usr/local/bin
    eksctl version
    ```
+Run the above commands separately. Command in each line should be run separately otherwise it won't work. Error occurs if the first command is wrong. So,ensure you are using the correct environment.
 
 #### Install `kubectl`:
 
@@ -80,6 +104,7 @@ Ensure you have the following:
    sudo mv kubectl /usr/local/bin/
    kubectl version --client
    ```
+Run the above commands separately. Command in each line should be run separately otherwise it won't work. 
 
 ### 4. Create an EKS Cluster
 
